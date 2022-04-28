@@ -1,2 +1,3 @@
 # RaiseTech_React
-This is a repository that I tried tasks of RaiseTech React course
+This is the assignment repository for the RaiseTech React course.
+
