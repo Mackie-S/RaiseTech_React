@@ -9,6 +9,7 @@ export const App = () => {
     window.location.reload();
   };
 
+        //本当はクイズを始めるボタンを押したらそのボタンを消したい
   return (
     <>
       <button onClick={onClickStart}>クイズを始める</button>
