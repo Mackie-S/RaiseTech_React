@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Questions } from "./Questions";
 
 //クイズリストをpropsとして渡すコンポーネント
 
@@ -33,39 +33,10 @@ const SuperHeroQuizLists = [
   },
 ];
 
-export const ReactQuiz = () => {
-  return <Questions QuestionLists={ReactQuizLists} />;
-};
-
-export const SuperHeroQuiz = () => {
-  return <Questions QuestionLists={SuperHeroQuizLists} />;
-};
-
-
-const Questions = ({ QuestionLists }) => {
-  const [qLIsts, setQLists] = useState(QuestionLists);
-  const inputAnswer = (selectedAnswer, targetIndex) => {
-    setQLists(qLIsts.map((list, index) => (index === targetIndex ? { ...list, selectedAnswer } : list)));
-  };
+export const Quizzes = () => {
   return (
     <>
-      {qLIsts.map(({ Question, Answers, Correct, selectedAnswer }, index) => {
-        return (
-          <div key={Question}>
-            <h2>{Question}</h2>
-            <div>
-              {Answers.map((answer) => {
-                return (
-                  <button key={answer} onClick={() => inputAnswer(answer, index)}>
-                    {answer}
-                  </button>
-                );
-              })}
-            </div>
-            {selectedAnswer && <p>{Correct === selectedAnswer ? "正解" : "不正解"}</p>}
-          </div>
-        );
-      })}
+      <Questions QuestionLists={[...ReactQuizLists, ...SuperHeroQuizLists]} />
     </>
   );
 };
