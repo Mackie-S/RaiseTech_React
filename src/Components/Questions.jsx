@@ -1,11 +1,28 @@
 import { useState, useMemo } from "react";
 
 export const Questions = ({ QuestionLists }) => {
+  const [isShow, setIsShow] = useState(false);
+  const onClickshow = () => {
+    setIsShow(!isShow);
+  };
   const [qLIsts, setQLists] = useState(QuestionLists);
   const inputAnswer = (selectedAnswer, targetIndex) => {
     setQLists(qLIsts.map((list, index) => (index === targetIndex ? { ...list, selectedAnswer } : list)));
   };
-  const correctAnswers = useMemo(() => qLIsts.filter(({ Correct, selectedAnswer }) => Correct === selectedAnswer).length, [qLIsts])
+  const correctAnswers = useMemo(() => qLIsts.filter(({ Correct, selectedAnswer }) => Correct === selectedAnswer).length, [qLIsts]);
+  const variableMessage = () => {
+    if (correctAnswers === 0) {
+      return "残念！全問不正解";
+    } else if (correctAnswers === 1) {
+      return "がんばれ！";
+    } else if (correctAnswers === 2) {
+      return "まだまだ！";
+    } else if (correctAnswers === 3) {
+      return "もう少し！";
+    } else if (correctAnswers === 4) {
+      return "おめでとう！全";
+    }
+  };
   return (
     <>
       {qLIsts.map(({ Question, Answers, Correct, selectedAnswer }, index) => {
@@ -15,17 +32,26 @@ export const Questions = ({ QuestionLists }) => {
             <div>
               {Answers.map((answer) => {
                 return (
-                  <button key={answer} onClick={() => inputAnswer(answer, index)}>
+                  <label>
+                    {/* name={index}とすることで複数選択されてしまう現象が解消 */}
+                    <input type="radio" key={answer} name={index} onClick={() => inputAnswer(answer, index)} />
                     {answer}
-                  </button>
+                  </label>
                 );
               })}
             </div>
-            {selectedAnswer && <p>{Correct === selectedAnswer ? "正解" : "不正解"}</p>}
+            {/* 空タグを入れることでうまく実装できたけどなぜ？ */}
+            {isShow && <>{selectedAnswer && <p>{Correct === selectedAnswer ? "正解" : "不正解"}</p>}</>}
           </div>
         );
       })}
-      <p> {`${correctAnswers}問正解`}</p>
+      <button onClick={onClickshow}>集計する</button>
+      {isShow && (
+        <>
+          {/* variableMessageに空引数をつけたら実装成功したけどなぜ？（ないと記述がまるまる表示される） */}
+          <p> {`${variableMessage()}${correctAnswers}問正解`}</p>
+        </>
+      )}
     </>
   );
 };
