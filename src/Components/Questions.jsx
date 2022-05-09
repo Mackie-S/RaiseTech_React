@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 export const Questions = ({ QuestionLists }) => {
   const [isShow, setIsShow] = useState(false);
@@ -12,7 +12,7 @@ export const Questions = ({ QuestionLists }) => {
   const correctAnswers = useMemo(() => qLIsts.filter(({ Correct, selectedAnswer }) => Correct === selectedAnswer).length, [qLIsts]);
   const variableMessage = () => {
     if (correctAnswers === 0) {
-      return "残念！全問不正解";
+      return "残念！";
     } else if (correctAnswers === 1) {
       return "がんばれ！";
     } else if (correctAnswers === 2) {
@@ -23,6 +23,7 @@ export const Questions = ({ QuestionLists }) => {
       return "おめでとう！全";
     }
   };
+
   return (
     <>
       {qLIsts.map(({ Question, Answers, Correct, selectedAnswer }, index) => {
@@ -32,9 +33,9 @@ export const Questions = ({ QuestionLists }) => {
             <div>
               {Answers.map((answer) => {
                 return (
-                  <label>
+                  <label key={answer}>
                     {/* name={index}とすることで複数選択されてしまう現象が解消 */}
-                    <input type="radio" key={answer} name={index} onClick={() => inputAnswer(answer, index)} />
+                    <input type="radio" name={index} required onClick={() => inputAnswer(answer, index)} />
                     {answer}
                   </label>
                 );
@@ -47,8 +48,8 @@ export const Questions = ({ QuestionLists }) => {
       })}
       <button onClick={onClickshow}>集計する</button>
       {isShow && (
+        /* variableMessageに空引数をつけたら実装成功したけどなぜ？（ないと記述がまるまる表示される） */
         <>
-          {/* variableMessageに空引数をつけたら実装成功したけどなぜ？（ないと記述がまるまる表示される） */}
           <p> {`${variableMessage()}${correctAnswers}問正解`}</p>
         </>
       )}
