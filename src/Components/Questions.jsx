@@ -35,7 +35,7 @@ export const Questions = ({ QuestionLists }) => {
                 return (
                   <label key={answer}>
                     {/* name={index}とすることで複数選択されてしまう現象が解消 */}
-                    <input type="radio" name={index} required onClick={() => inputAnswer(answer, index)} />
+                    <input type="radio" name={index} required onChange={() => inputAnswer(answer, index)} />
                     {answer}
                   </label>
                 );
@@ -48,10 +48,7 @@ export const Questions = ({ QuestionLists }) => {
       })}
       <button onClick={onClickshow}>集計する</button>
       {isShow && (
-        /* variableMessageに空引数をつけたら実装成功したけどなぜ？（ないと記述がまるまる表示される） */
-        <>
           <p> {`${variableMessage()}${correctAnswers}問正解`}</p>
-        </>
       )}
     </>
   );
