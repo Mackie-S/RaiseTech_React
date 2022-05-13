@@ -36,8 +36,6 @@ const SuperHeroQuizLists = [
 export const Quizzes = () => {
   return (
     // スプレッド構文にすることで記述を一行で書くことに成功
-    <>
       <Questions QuestionLists={[...ReactQuizLists, ...SuperHeroQuizLists]} />
-    </>
   );
 };
