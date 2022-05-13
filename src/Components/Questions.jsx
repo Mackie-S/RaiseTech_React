@@ -41,8 +41,7 @@ export const Questions = ({ QuestionLists }) => {
                 );
               })}
             </div>
-            {/* 空タグを入れることでうまく実装できたけどなぜ？ */}
-            {isShow && <>{selectedAnswer && <p>{Correct === selectedAnswer ? "正解" : "不正解"}</p>}</>}
+            {(isShow && selectedAnswer) && <p>{Correct === selectedAnswer ? "正解" : "不正解"}</p>}
           </div>
         );
       })}
