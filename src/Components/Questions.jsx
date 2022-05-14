@@ -1,11 +1,11 @@
 import { useState, useMemo } from "react";
 
-export const Questions = ({ QuestionLists }) => {
-  const [isShow, setIsShow] = useState(false);
+export const Questions = ({ questionLists }) => {
+  const [isShowAnswers, setIsShowAnswers] = useState(false);
   const onClickshow = () => {
-    setIsShow(!isShow);
+    setIsShowAnswers(!isShowAnswers);
   };
-  const [qLIsts, setQLists] = useState(QuestionLists);
+  const [qLIsts, setQLists] = useState(questionLists);
   const inputAnswer = (selectedAnswer, targetIndex) => {
     setQLists(qLIsts.map((list, index) => (index === targetIndex ? { ...list, selectedAnswer } : list)));
   };
@@ -41,12 +41,12 @@ export const Questions = ({ QuestionLists }) => {
                 );
               })}
             </div>
-            {(isShow && selectedAnswer) && <p>{Correct === selectedAnswer ? "正解" : "不正解"}</p>}
+            {(isShowAnswers && selectedAnswer) && <p>{Correct === selectedAnswer ? "正解" : "不正解"}</p>}
           </div>
         );
       })}
       <button onClick={onClickshow}>集計する</button>
-      {isShow && (
+      {isShowAnswers && (
           <p> {`${variableMessage()}${correctAnswers}問正解`}</p>
       )}
     </>
