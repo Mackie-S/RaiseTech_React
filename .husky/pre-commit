@@ -2,5 +2,4 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 # コミット前に実行されるコマンド
-npm lint-staged
-npm test
+# npm test (これの意味があまりわかっていないので一度コメントアウト)
