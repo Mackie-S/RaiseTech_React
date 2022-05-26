@@ -2,7 +2,8 @@ import dayjs from "dayjs";
 
 export const Date = () => {
   const now = dayjs(); // 現在の日付時刻を取得する関数
-  const currentHour = dayjs().hour();
+  const currentDate = now.format("YYYY/MM/DD HH:mm");
+  const currentHour = now.hour(); // 時間を取得する関数
 
   // 5〜17時は太陽マーク、17〜5時は月マークを表示するようにしたいなぁ
   const toggleGreeting = () => {
@@ -16,9 +17,9 @@ export const Date = () => {
   };
 
   return (
-    <>
-      {/* 分の表示を大文字のMMにすると実際の時間から2分遅れるけどなぜ？ */}
-      <p> {`${toggleGreeting()}現在は${now.format("YYYY/MM/DD HH:mm")} です`}</p>
-    </>
+      <div className="top-5 right-5">
+        <p> {toggleGreeting()}</p>
+        <p>{`現在は${currentDate} です。`}</p>
+      </div>
   );
 };
