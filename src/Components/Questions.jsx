@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo} from "react";
 
 export const Questions = ({ questionLists }) => {
   const [isShowAnswers, setIsShowAnswers] = useState(false);
@@ -12,15 +12,15 @@ export const Questions = ({ questionLists }) => {
   const correctAnswers = useMemo(() => qLIsts.filter(({ Correct, selectedAnswer }) => Correct === selectedAnswer).length, [qLIsts]);
   const variableMessage = () => {
     if (correctAnswers === 0) {
-      return "残念！";
+      return "残念👋";
     } else if (correctAnswers === 1) {
-      return "がんばれ！";
+      return "がんばれ💪";
     } else if (correctAnswers === 2) {
-      return "まだまだ！";
+      return "まだまだ✊";
     } else if (correctAnswers === 3) {
-      return "もう少し！";
+      return "もう少し✋";
     } else if (correctAnswers === 4) {
-      return "おめでとう！全";
+      return "おめでとう👏全";
     }
   };
 
