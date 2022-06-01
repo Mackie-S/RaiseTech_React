@@ -2,8 +2,9 @@ import { useState } from "react";
 import "./App.css";
 import { Quizzes } from "./Components/Quizzes";
 import { MyTabs } from "./Components/MyTabs";
-import { RequiredAleart } from "./Components/RequiredAleart";
+// import { RequiredAleart } from "./Components/RequiredAleart";
 import { Header } from "./Components/Header";
+import { MyRadioGroup } from "./Components/MyRadioGroup";
 
 export const App = () => {
   const [isShowQuizzes, setIsShowQuizzes] = useState(false);
@@ -25,7 +26,8 @@ export const App = () => {
         <Quizzes />
       )}
       <MyTabs />
-      <RequiredAleart />
+      <MyRadioGroup />
+      {/* <RequiredAleart /> */}
     </>
   );
 };
