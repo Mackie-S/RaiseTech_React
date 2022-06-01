@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Tab } from '@headlessui/react'
+import { MyRadioGroup } from './MyRadioGroup'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -10,8 +11,8 @@ export const MyTabs = () => {
     Reactクイズ: [
       {
         id: 1,
-        title: 'Does drinking coffee make you smarter?',
-        date: '5h ago',
+        title: "1.Reactを開発したのは誰？",
+        date: ["Twitter", "Facebook", "mixi", "Brendan Eich"],
         commentCount: 5,
         shareCount: 2,
       },
@@ -61,8 +62,11 @@ export const MyTabs = () => {
     <div className="w-full max-w-md px-2 py-16 sm:px-0">
       <Tab.Group>
         <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1">
+          {/* Object.keys()メソッドでオブジェクトのプロパティ名を配列として取得し、その配列に対してmapメソッドで指定した処理を行う */}
           {Object.keys(categories).map((category) => (
             <Tab
+              // keyがないとエラー→なんのためにkeyがあるのかわからなかったが、公式に
+              // Keys help React identify which items have changed, are added, or are removedとあった
               key={category}
               className={({ selected }) =>
                 classNames(
@@ -79,7 +83,7 @@ export const MyTabs = () => {
           ))}
         </Tab.List>
         <Tab.Panels className="mt-2">
-          {Object.values(categories).map((posts, idx) => (
+          {/* {Object.values(categories).map((posts, idx) => (
             <Tab.Panel
               key={idx}
               className={classNames(
@@ -114,9 +118,10 @@ export const MyTabs = () => {
                     />
                   </li>
                 ))}
-              </ul>
-            </Tab.Panel>
-          ))}
+              </ul> */}
+            {/* </Tab.Panel> */}
+          {/* ))} */}
+          <MyRadioGroup />
         </Tab.Panels>
       </Tab.Group>
     </div>
