@@ -80,7 +80,7 @@ export const MyTabs = () => {
               <ul>
                 {posts.map((post) => (
                   <li key={post.id} className="relative rounded-md p-3 hover:bg-gray-100">
-                    <h3 className="text-sm font-medium leading-5">                          {`${post.id}.${post.Question}`}</h3>
+                    <h3 className="text-sm font-medium leading-5">                          {`${post.id}. ${post.Question}`}</h3>
                     <ul className="mt-1 flex space-x-1 text-xs font-normal leading-4 text-gray-500">
                       {/* 自作できた！！！ 2022/6/8 →ここをradio buttonにしたい */}
                       {post.Answers.map((Answer) => (
