@@ -37,7 +37,7 @@ export const Questions = ({ questionLists }) => {
   // };
 
   return (
-    <>
+    <div className="w-full px-4 py-16">
       {qLIsts.map(({ Question, Answers, Correct, selectedAnswer }, index) => {
         return (
           <div key={Question}>
@@ -67,6 +67,6 @@ export const Questions = ({ questionLists }) => {
       </button>
       {/* <Toaster /> */}
       {isShowAnswers && <p> {`${variableMessage()}${correctAnswers}問正解`}</p>}
-    </>
+    </div>
   );
 };

@@ -1,9 +1,9 @@
-import { useState } from 'react'
-import { Tab } from '@headlessui/react'
-import { MyRadioGroup } from './MyRadioGroup'
+import { useState } from "react";
+import { Tab } from "@headlessui/react";
+// import { MyRadioGroup } from './MyRadioGroup'
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(" ");
 }
 
 export const MyTabs = () => {
@@ -11,56 +11,56 @@ export const MyTabs = () => {
     Reactクイズ: [
       {
         id: 1,
-        title: "1.Reactを開発したのは誰？",
-        date: ["Twitter", "Facebook", "mixi", "Brendan Eich"],
-        commentCount: 5,
-        shareCount: 2,
+        Question: "Reactを開発したのは誰？",
+        Answers: ["Twitter", "Facebook", "mixi", "Brendan Eich"],
+        Correct: "Facebook",
+        SelectedAnswer: "",
       },
       {
         id: 2,
-        title: "So you've bought coffee... now what?",
-        date: '2h ago',
-        commentCount: 3,
-        shareCount: 2,
+        Question: "Reactのフレームワークでないものはどれ？",
+        Answers: ["Next.js", "Remix", "Gatsby", "Gridsome"],
+        Correct: "Gridsome",
+        selectedAnswer: "",
       },
     ],
     スーパー戦隊クイズ: [
       {
         id: 1,
-        title: 'Is tech making coffee better or worse?',
-        date: 'Jan 7',
-        commentCount: 29,
-        shareCount: 16,
+        Question: "初代のスーパー戦隊はどれ？",
+        Answers: ["ジャッカー電撃隊", "バトルフィーバーJ", "秘密戦隊ゴレンジャー", "五星戦隊ダイレンジャー"],
+        Correct: "秘密戦隊ゴレンジャー",
+        selectedAnswer: "",
       },
       {
         id: 2,
-        title: 'The most innovative things happening in coffee',
-        date: 'Mar 19',
-        commentCount: 24,
-        shareCount: 12,
+        Question: "2022年現在、最新のスーパー戦隊はどれ？",
+        Answers: ["機界戦隊ゼンカイジャー", "暴太郎戦隊ドンブラザーズ", "超新星フラッシュマン", "未来戦隊タイムレンジャー"],
+        Correct: "暴太郎戦隊ドンブラザーズ",
+        selectedAnswer: "",
       },
     ],
-    結果: [
+    香料クイズ: [
       {
         id: 1,
-        title: 'Ask Me Anything: 10 answers to your questions about coffee',
-        date: '2d ago',
-        commentCount: 9,
-        shareCount: 5,
+        Question: "青葉アルコールと称されるグリーンな香りのする化合物はどれ？",
+        Answers: ["Hexanol", "cis-3-Hexenol", "trans-2-Hexenol", "cis-3-Hexenal"],
+        Correct: "cis-3-Hexenol",
+        SelectedAnswer: "",
       },
       {
         id: 2,
-        title: "The worst advice we've ever heard about coffee",
-        date: '4d ago',
-        commentCount: 1,
-        shareCount: 2,
+        Question: "コーヒーの香りに重要だが不安定な化合物はどれ？",
+        Answers: ["Guaiacol", "Pyridine", "Citral", "Furfuryl mercaptan"],
+        Correct: "Furfuryl mercaptan",
+        SelectedAnswer: "",
       },
     ],
-  })
+  });
 
   return (
-    <div className="w-full max-w-md px-2 py-16 sm:px-0">
-      <Tab.Group>
+    <div className="w-full max-w-2xl px-2 py-16 sm:px-0">
+      <Tab.Group manual>
         <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1">
           {/* Object.keys()メソッドでオブジェクトのプロパティ名を配列として取得し、その配列に対してmapメソッドで指定した処理を行う */}
           {Object.keys(categories).map((category) => (
@@ -68,63 +68,35 @@ export const MyTabs = () => {
               // keyがないとエラー→なんのためにkeyがあるのかわからなかったが、公式に
               // Keys help React identify which items have changed, are added, or are removedとあった
               key={category}
-              className={({ selected }) =>
-                classNames(
-                  'w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-blue-700',
-                  'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2',
-                  selected
-                    ? 'bg-white shadow'
-                    : 'text-blue-100 hover:bg-white/[0.12] hover:text-white'
-                )
-              }
+              className={({ selected }) => classNames("w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-blue-700", "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2", selected ? "bg-white shadow" : "text-blue-100 hover:bg-white/[0.12] hover:text-white")}
             >
               {category}
             </Tab>
           ))}
         </Tab.List>
         <Tab.Panels className="mt-2">
-          {/* {Object.values(categories).map((posts, idx) => (
-            <Tab.Panel
-              key={idx}
-              className={classNames(
-                'rounded-xl bg-white p-3',
-                'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2'
-              )}
-            >
+          {Object.values(categories).map((posts, idx) => (
+            <Tab.Panel key={idx} className={classNames("rounded-xl bg-white p-3", "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2")}>
               <ul>
                 {posts.map((post) => (
-                  <li
-                    key={post.id}
-                    className="relative rounded-md p-3 hover:bg-gray-100"
-                  >
-                    <h3 className="text-sm font-medium leading-5">
-                      {post.title}
-                    </h3>
-
+                  <li key={post.id} className="relative rounded-md p-3 hover:bg-gray-100">
+                    <h3 className="text-sm font-medium leading-5">                          {`${post.id}.${post.Question}`}</h3>
                     <ul className="mt-1 flex space-x-1 text-xs font-normal leading-4 text-gray-500">
-                      <li>{post.date}</li>
-                      <li>&middot;</li>
-                      <li>{post.commentCount} comments</li>
-                      <li>&middot;</li>
-                      <li>{post.shareCount} shares</li>
+                      {/* 自作できた！！！ 2022/6/8 →ここをradio buttonにしたい */}
+                      {post.Answers.map((Answer) => (
+                        <li key={Answer} className="hover:bg-gray-100">
+                          {Answer}
+                        </li>
+                      ))}
                     </ul>
-
-                    <a
-                      href="#"
-                      className={classNames(
-                        'absolute inset-0 rounded-md',
-                        'ring-blue-400 focus:z-10 focus:outline-none focus:ring-2'
-                      )}
-                    />
+                    {/* <a href="#" className={classNames("absolute inset-0 rounded-md", "ring-blue-400 focus:z-10 focus:outline-none focus:ring-2")} /> */}
                   </li>
                 ))}
-              </ul> */}
-            {/* </Tab.Panel> */}
-          {/* ))} */}
-          <MyRadioGroup />
+              </ul>
+            </Tab.Panel>
+          ))}
         </Tab.Panels>
       </Tab.Group>
     </div>
-  )
-}
-
+  );
+};

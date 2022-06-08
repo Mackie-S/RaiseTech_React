@@ -1,4 +1,5 @@
 import { Questions } from "./Questions";
+// import { MyRadioGroup } from "./MyRadioGroup";
 
 // クイズリストをpropsとして渡すコンポーネント
 
