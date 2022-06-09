@@ -1,11 +1,5 @@
 export const Buttons = (props) => {
-  return (
-    <div>
-      <button onClick={props.onClick}>
-        {props.children}
-      </button>
-    </div>
-  );
+  return <button onClick={props.onClick}>{props.children}</button>;
 };
 
 // スタートボタン：className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
