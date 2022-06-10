@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Tab } from "@headlessui/react";
+import { Test} from "./Test"
+
 // import { MyRadioGroup } from './MyRadioGroup'
 
 function classNames(...classes) {
@@ -59,7 +61,7 @@ export const MyTabs = () => {
   });
 
   return (
-    <div className="w-full max-w-2xl px-2 py-16 sm:px-0">
+    <div className="w-full max-w-2xl px-2 py-16 sm:px-0 rounded-xl">
       <Tab.Group manual>
         <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1">
           {/* Object.keys()メソッドでオブジェクトのプロパティ名を配列として取得し、その配列に対してmapメソッドで指定した処理を行う */}
@@ -79,15 +81,11 @@ export const MyTabs = () => {
             <Tab.Panel key={idx} className={classNames("rounded-xl bg-white p-3", "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2")}>
               <ul>
                 {posts.map((post) => (
-                  <li key={post.id} className="relative rounded-md p-3 hover:bg-gray-100">
+                  <li key={post.id} className="relative rounded-md p-3 ">
                     <h3 className="text-sm font-medium leading-5">                          {`${post.id}. ${post.Question}`}</h3>
                     <ul className="mt-1 flex space-x-1 text-xs font-normal leading-4 text-gray-500">
-                      {/* 自作できた！！！ 2022/6/8 →ここをradio buttonにしたい */}
-                      {post.Answers.map((Answer) => (
-                        <li key={Answer} className="hover:bg-gray-100">
-                          {Answer}
-                        </li>
-                      ))}
+                      {/* 自作できた！！！ 2022/6/8 →ここをradio buttonにしたい→できた？ 2022/6/10 */}
+                        <Test key={post.id} Answers={post.Answers} />
                     </ul>
                     {/* <a href="#" className={classNames("absolute inset-0 rounded-md", "ring-blue-400 focus:z-10 focus:outline-none focus:ring-2")} /> */}
                   </li>
