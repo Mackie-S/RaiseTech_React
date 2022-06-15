@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./App.css";
-import { MyTabs } from "./Components/MyTabs";
+import { EachQuizTabs } from "./Components/EachQuizTabs";
 // import { RequiredAleart } from "./Components/RequiredAleart";
 import { Header } from "./Components/Header";
 
@@ -20,7 +20,7 @@ export const App = () => {
   return (
     <>
       <Header onClickStart={onClickStart} onClickReset={onClickReset} />
-      <div className="flex justify-center">{isShowQuizzes && <MyTabs />}</div>
+      <div className="flex justify-center">{isShowQuizzes && <EachQuizTabs />}</div>
       {/* <RequiredAleart /> */}
     </>
   );
