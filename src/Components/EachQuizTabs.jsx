@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Tab } from "@headlessui/react";
-import { MyRadio } from "./MyRadio";
+import { RadioShowAnswers } from "./RadioShowAnswers";
 import { Buttons } from "./Buttons";
 
 // import { MyRadioGroup } from './MyRadioGroup'
@@ -9,7 +9,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export const MyTabs = (props) => {
+export const EachQuizTabs = (props) => {
   const [isShowAnswers, setIsShowAnswers] = useState(false);
   const onClickshow = () => {
     setIsShowAnswers(isShowAnswers === false ? !isShowAnswers : isShowAnswers);
@@ -90,7 +90,7 @@ export const MyTabs = (props) => {
                     <h3 className="text-sm font-medium leading-5"> {`${post.id}. ${post.Question}`}</h3>
                     <ul className="mt-1 flex space-x-1 text-xs font-normal leading-4 text-gray-500">
                       {/* 自作できた！！！ 2022/6/8 →ここをradio buttonにしたい→できた! 2022/6/10 */}
-                      <MyRadio key={post.id} Answers={post.Answers} Correct={post.Correct} isShowAnswers={isShowAnswers} />
+                      <RadioShowAnswers key={post.id} Answers={post.Answers} Correct={post.Correct} isShowAnswers={isShowAnswers} />
                     </ul>
                     {/* <a href="#" className={classNames("absolute inset-0 rounded-md", "ring-blue-400 focus:z-10 focus:outline-none focus:ring-2")} /> */}
                   </li>

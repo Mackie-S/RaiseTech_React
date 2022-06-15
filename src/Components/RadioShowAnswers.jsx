@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { RadioGroup } from "@headlessui/react";
 
-export const MyRadio = (props) => {
+export const RadioShowAnswers = (props) => {
   const [selected, setSelected] = useState("");
   // const [isDisabled, setIsDisabled] = useState(false);
   // const changeDisabled = () => {
