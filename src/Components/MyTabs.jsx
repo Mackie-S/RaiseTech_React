@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Tab } from "@headlessui/react";
-import { Test } from "./MyRadio";
+import { MyRadio } from "./MyRadio";
 import { Buttons } from "./Buttons";
 
 // import { MyRadioGroup } from './MyRadioGroup'
@@ -90,7 +90,7 @@ export const MyTabs = (props) => {
                     <h3 className="text-sm font-medium leading-5"> {`${post.id}. ${post.Question}`}</h3>
                     <ul className="mt-1 flex space-x-1 text-xs font-normal leading-4 text-gray-500">
                       {/* 自作できた！！！ 2022/6/8 →ここをradio buttonにしたい→できた! 2022/6/10 */}
-                      <Test key={post.id} Answers={post.Answers} Correct={post.Correct} isShowAnswers={isShowAnswers} />
+                      <MyRadio key={post.id} Answers={post.Answers} Correct={post.Correct} isShowAnswers={isShowAnswers} />
                     </ul>
                     {/* <a href="#" className={classNames("absolute inset-0 rounded-md", "ring-blue-400 focus:z-10 focus:outline-none focus:ring-2")} /> */}
                   </li>
