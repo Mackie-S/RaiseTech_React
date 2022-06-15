@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Tab } from "@headlessui/react";
-import { Test} from "./Test"
+import { Test } from "./MyRadio";
+import { Buttons } from "./Buttons";
 
 // import { MyRadioGroup } from './MyRadioGroup'
 
@@ -8,7 +9,11 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export const MyTabs = () => {
+export const MyTabs = (props) => {
+  const [isShowAnswers, setIsShowAnswers] = useState(false);
+  const onClickshow = () => {
+    setIsShowAnswers(isShowAnswers === false ? !isShowAnswers : isShowAnswers);
+  };
   const [categories] = useState({
     Reactクイズ: [
       {
@@ -16,14 +21,14 @@ export const MyTabs = () => {
         Question: "Reactを開発したのは誰？",
         Answers: ["Twitter", "Facebook", "mixi", "Brendan Eich"],
         Correct: "Facebook",
-        SelectedAnswer: "",
+        Group: "React",
       },
       {
         id: 2,
         Question: "Reactのフレームワークでないものはどれ？",
         Answers: ["Next.js", "Remix", "Gatsby", "Gridsome"],
         Correct: "Gridsome",
-        selectedAnswer: "",
+        Group: "React",
       },
     ],
     スーパー戦隊クイズ: [
@@ -32,14 +37,14 @@ export const MyTabs = () => {
         Question: "初代のスーパー戦隊はどれ？",
         Answers: ["ジャッカー電撃隊", "バトルフィーバーJ", "秘密戦隊ゴレンジャー", "五星戦隊ダイレンジャー"],
         Correct: "秘密戦隊ゴレンジャー",
-        selectedAnswer: "",
+        Group: "Ranger",
       },
       {
         id: 2,
         Question: "2022年現在、最新のスーパー戦隊はどれ？",
         Answers: ["機界戦隊ゼンカイジャー", "暴太郎戦隊ドンブラザーズ", "超新星フラッシュマン", "未来戦隊タイムレンジャー"],
         Correct: "暴太郎戦隊ドンブラザーズ",
-        selectedAnswer: "",
+        Group: "Ranger",
       },
     ],
     香料クイズ: [
@@ -48,14 +53,14 @@ export const MyTabs = () => {
         Question: "青葉アルコールと称されるグリーンな香りのする化合物はどれ？",
         Answers: ["Hexanol", "cis-3-Hexenol", "trans-2-Hexenol", "cis-3-Hexenal"],
         Correct: "cis-3-Hexenol",
-        SelectedAnswer: "",
+        Group: "Flavor",
       },
       {
         id: 2,
         Question: "コーヒーの香りに重要だが不安定な化合物はどれ？",
         Answers: ["Guaiacol", "Pyridine", "Citral", "Furfuryl mercaptan"],
         Correct: "Furfuryl mercaptan",
-        SelectedAnswer: "",
+        Group: "Flavor",
       },
     ],
   });
@@ -78,14 +83,14 @@ export const MyTabs = () => {
         </Tab.List>
         <Tab.Panels className="mt-2">
           {Object.values(categories).map((posts, idx) => (
-            <Tab.Panel key={idx} className={classNames("rounded-xl bg-white p-3", "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2")}>
+            <Tab.Panel key={idx} className={classNames("rounded-xl bg-white p-3", "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none")}>
               <ul>
                 {posts.map((post) => (
                   <li key={post.id} className="relative rounded-md p-3 ">
-                    <h3 className="text-sm font-medium leading-5">                          {`${post.id}. ${post.Question}`}</h3>
+                    <h3 className="text-sm font-medium leading-5"> {`${post.id}. ${post.Question}`}</h3>
                     <ul className="mt-1 flex space-x-1 text-xs font-normal leading-4 text-gray-500">
-                      {/* 自作できた！！！ 2022/6/8 →ここをradio buttonにしたい→できた？ 2022/6/10 */}
-                        <Test key={post.id} Answers={post.Answers} />
+                      {/* 自作できた！！！ 2022/6/8 →ここをradio buttonにしたい→できた! 2022/6/10 */}
+                      <Test key={post.id} Answers={post.Answers} Correct={post.Correct} isShowAnswers={isShowAnswers} />
                     </ul>
                     {/* <a href="#" className={classNames("absolute inset-0 rounded-md", "ring-blue-400 focus:z-10 focus:outline-none focus:ring-2")} /> */}
                   </li>
@@ -94,6 +99,11 @@ export const MyTabs = () => {
             </Tab.Panel>
           ))}
         </Tab.Panels>
+        <div className="flex justify-center">
+          <Buttons onClick={onClickshow} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+            正答を表示する
+          </Buttons>
+        </div>
       </Tab.Group>
     </div>
   );
