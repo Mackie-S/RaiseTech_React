@@ -14,6 +14,10 @@ export const EachQuizTabs = (props) => {
   const onClickshow = () => {
     setIsShowAnswers(isShowAnswers === false ? !isShowAnswers : isShowAnswers);
   };
+  const onChangeMoveTab = () => {
+    setIsShowAnswers(isShowAnswers === true ? !isShowAnswers : isShowAnswers);
+  };
+
   const [categories] = useState({
     Reactクイズ: [
       {
@@ -67,16 +71,11 @@ export const EachQuizTabs = (props) => {
 
   return (
     <div className="w-full max-w-2xl px-2 py-16 sm:px-0 rounded-xl">
-      <Tab.Group manual>
+      <Tab.Group manual  onChange={onChangeMoveTab}>
         <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1">
           {/* Object.keys()メソッドでオブジェクトのプロパティ名を配列として取得し、その配列に対してmapメソッドで指定した処理を行う */}
           {Object.keys(categories).map((category) => (
-            <Tab
-              // keyがないとエラー→なんのためにkeyがあるのかわからなかったが、公式に
-              // Keys help React identify which items have changed, are added, or are removedとあった
-              key={category}
-              className={({ selected }) => classNames("w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-blue-700", "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2", selected ? "bg-white shadow" : "text-blue-100 hover:bg-white/[0.12] hover:text-white")}
-            >
+            <Tab key={category} className={({ selected }) => classNames("w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-blue-700", "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2", selected ? "bg-white shadow" : "text-blue-100 hover:bg-white/[0.12] hover:text-white")}>
               {category}
             </Tab>
           ))}
@@ -98,12 +97,12 @@ export const EachQuizTabs = (props) => {
               </ul>
             </Tab.Panel>
           ))}
+          <div className="flex justify-center">
+            <Buttons onClick={onClickshow} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+              正答を表示する
+            </Buttons>
+          </div>
         </Tab.Panels>
-        <div className="flex justify-center">
-          <Buttons onClick={onClickshow} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-            正答を表示する
-          </Buttons>
-        </div>
       </Tab.Group>
     </div>
   );
