@@ -11,9 +11,13 @@ function classNames(...classes) {
 
 export const EachQuizTabs = (props) => {
   const [isShowAnswers, setIsShowAnswers] = useState(false);
+
+  // 正答表示ボタンを押した際に正答を表示する機能
   const onClickshow = () => {
     setIsShowAnswers(true);
   };
+  
+  // tabを移動した時に正答表示ボタンをリセットする機能
   const onChangeMoveTab = () => {
     setIsShowAnswers(false);
   };
