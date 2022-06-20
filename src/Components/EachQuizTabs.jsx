@@ -12,10 +12,10 @@ function classNames(...classes) {
 export const EachQuizTabs = (props) => {
   const [isShowAnswers, setIsShowAnswers] = useState(false);
   const onClickshow = () => {
-    setIsShowAnswers(isShowAnswers === false ? !isShowAnswers : isShowAnswers);
+    setIsShowAnswers(true);
   };
   const onChangeMoveTab = () => {
-    setIsShowAnswers(isShowAnswers === true ? !isShowAnswers : isShowAnswers);
+    setIsShowAnswers(false);
   };
 
   const [categories] = useState({
@@ -26,6 +26,7 @@ export const EachQuizTabs = (props) => {
         Answers: ["Twitter", "Facebook", "mixi", "Brendan Eich"],
         Correct: "Facebook",
         Group: "React",
+        selected: "",
       },
       {
         id: 2,
@@ -33,6 +34,7 @@ export const EachQuizTabs = (props) => {
         Answers: ["Next.js", "Remix", "Gatsby", "Gridsome"],
         Correct: "Gridsome",
         Group: "React",
+        selected: "",
       },
     ],
     スーパー戦隊クイズ: [
@@ -42,6 +44,7 @@ export const EachQuizTabs = (props) => {
         Answers: ["ジャッカー電撃隊", "バトルフィーバーJ", "秘密戦隊ゴレンジャー", "五星戦隊ダイレンジャー"],
         Correct: "秘密戦隊ゴレンジャー",
         Group: "Ranger",
+        selected: "",
       },
       {
         id: 2,
@@ -49,6 +52,7 @@ export const EachQuizTabs = (props) => {
         Answers: ["機界戦隊ゼンカイジャー", "暴太郎戦隊ドンブラザーズ", "超新星フラッシュマン", "未来戦隊タイムレンジャー"],
         Correct: "暴太郎戦隊ドンブラザーズ",
         Group: "Ranger",
+        selected: "",
       },
     ],
     香料クイズ: [
@@ -58,6 +62,7 @@ export const EachQuizTabs = (props) => {
         Answers: ["Hexanol", "cis-3-Hexenol", "trans-2-Hexenol", "cis-3-Hexenal"],
         Correct: "cis-3-Hexenol",
         Group: "Flavor",
+        selected: "",
       },
       {
         id: 2,
@@ -65,9 +70,17 @@ export const EachQuizTabs = (props) => {
         Answers: ["Guaiacol", "Pyridine", "Citral", "Furfuryl mercaptan"],
         Correct: "Furfuryl mercaptan",
         Group: "Flavor",
+        selected: "",
       },
     ],
   });
+  // const inputAnswer = () => {
+  //   setCategories(Object.values(categories).map((posts) => {
+  //     posts.map((post) => {
+  //       if(post.selected === post.Answers.map(Answer))
+  //     })
+  //   })
+  // }
 
   return (
     <div className="w-full max-w-2xl px-2 py-16 sm:px-0 rounded-xl">
