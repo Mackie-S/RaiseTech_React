@@ -16,13 +16,13 @@ export const EachQuizTabs = (props) => {
   const onClickshow = () => {
     setIsShowAnswers(true);
   };
-  
+
   // tabを移動した時に正答表示ボタンをリセットする機能
   const onChangeMoveTab = () => {
     setIsShowAnswers(false);
   };
 
-  const [categories] = useState({
+  const [categories,setCategories] = useState({
     Reactクイズ: [
       {
         id: 1,
