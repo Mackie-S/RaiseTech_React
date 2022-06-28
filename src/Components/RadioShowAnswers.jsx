@@ -1,25 +1,21 @@
 // RadioButtonコンポーネントのテスト
-import { useState } from "react";
+
 import { RadioGroup } from "@headlessui/react";
 
 export const RadioShowAnswers = (props) => {
-  const [selected, setSelected] = useState("");
-  // const [isDisabled, setIsDisabled] = useState(false);
-  // const changeDisabled = () => {
-  //   if (props.isShowAnswers === true) {
-  //     setIsDisabled(!isDisabled)
-  //   }
-  // };
+
+
   return (
     <div className="w-full px-4 py-16">
       <div className="mx-auto w-full max-w-md">
-        <RadioGroup value={selected} onChange={ setSelected }>
+        <RadioGroup value={props.SelectedAnswer} onChange={(value, index) => props.inputAnswer(value, index)}>
           <RadioGroup.Label className="sr-only">Server size</RadioGroup.Label>
           <div className="space-y-2">
             {props.Answers.map((Answer) => (
               <RadioGroup.Option
                 key={Answer}
                 value={Answer}
+                checked={Answer === props.SelectedAnswer}
                 className={({ active, checked }) =>
                   `${active ? "ring-2 ring-white ring-opacity-60 ring-offset-2 ring-offset-sky-300" : ""}
                   ${checked ? "bg-sky-900 bg-opacity-75 text-white" : "bg-white"}
@@ -48,7 +44,7 @@ export const RadioShowAnswers = (props) => {
             ))}
           </div>
         </RadioGroup>
-        {props.isShowAnswers && selected && <p className="text-lg text-center mt-9">{props.Correct === selected ? "正解🙆‍♂️" : `不正解🙅‍♂️ 正解は"${props.Correct}"です`}</p>}
+        {props.isShowAnswers && props.selected && <p className="text-lg text-center mt-9">{props.Correct === props.selected ? "正解🙆‍♂️" : `不正解🙅‍♂️ 正解は"${props.Correct}"です`}</p>}
       </div>
     </div>
   );

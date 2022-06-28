@@ -16,11 +16,11 @@ export const EachQuizTabs = (props) => {
   const onClickshow = () => {
     setIsShowAnswers(true);
   };
-
   // tabを移動した時に正答表示ボタンをリセットする機能
   const onChangeMoveTab = () => {
     setIsShowAnswers(false);
   };
+  //
 
   const [categories,setCategories] = useState({
     Reactクイズ: [
@@ -30,7 +30,7 @@ export const EachQuizTabs = (props) => {
         Answers: ["Twitter", "Facebook", "mixi", "Brendan Eich"],
         Correct: "Facebook",
         Group: "React",
-        selected: "",
+        SelectedAnswer: "",
       },
       {
         id: 2,
@@ -38,7 +38,7 @@ export const EachQuizTabs = (props) => {
         Answers: ["Next.js", "Remix", "Gatsby", "Gridsome"],
         Correct: "Gridsome",
         Group: "React",
-        selected: "",
+        SelectedAnswer: "",
       },
     ],
     スーパー戦隊クイズ: [
@@ -48,7 +48,7 @@ export const EachQuizTabs = (props) => {
         Answers: ["ジャッカー電撃隊", "バトルフィーバーJ", "秘密戦隊ゴレンジャー", "五星戦隊ダイレンジャー"],
         Correct: "秘密戦隊ゴレンジャー",
         Group: "Ranger",
-        selected: "",
+        SelectedAnswer: "",
       },
       {
         id: 2,
@@ -56,7 +56,7 @@ export const EachQuizTabs = (props) => {
         Answers: ["機界戦隊ゼンカイジャー", "暴太郎戦隊ドンブラザーズ", "超新星フラッシュマン", "未来戦隊タイムレンジャー"],
         Correct: "暴太郎戦隊ドンブラザーズ",
         Group: "Ranger",
-        selected: "",
+        SelectedAnswer: "",
       },
     ],
     香料クイズ: [
@@ -66,7 +66,7 @@ export const EachQuizTabs = (props) => {
         Answers: ["Hexanol", "cis-3-Hexenol", "trans-2-Hexenol", "cis-3-Hexenal"],
         Correct: "cis-3-Hexenol",
         Group: "Flavor",
-        selected: "",
+        SelectedAnswer: "",
       },
       {
         id: 2,
@@ -74,17 +74,26 @@ export const EachQuizTabs = (props) => {
         Answers: ["Guaiacol", "Pyridine", "Citral", "Furfuryl mercaptan"],
         Correct: "Furfuryl mercaptan",
         Group: "Flavor",
-        selected: "",
+        SelectedAnswer: "",
       },
     ],
   });
-  // const inputAnswer = () => {
-  //   setCategories(Object.values(categories).map((posts) => {
-  //     posts.map((post) => {
-  //       if(post.selected === post.Answers.map(Answer))
-  //     })
-  //   })
-  // }
+
+  const inputAnswer = (SelectedAnswer, targetIndex) => {
+    const newCategories = Object.values(categories).map((posts) => {
+    return (
+      posts.map((post, index) => {
+        return (
+          index === targetIndex ? { ...post, SelectedAnswer  } : post
+          )
+        })
+      )
+    })
+    console.log(newCategories);
+    setCategories(newCategories);
+  }
+
+
 
   return (
     <div className="w-full max-w-2xl px-2 py-16 sm:px-0 rounded-xl">
@@ -101,12 +110,12 @@ export const EachQuizTabs = (props) => {
           {Object.values(categories).map((posts, idx) => (
             <Tab.Panel key={idx} className={classNames("rounded-xl bg-white p-3", "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none")}>
               <ul>
-                {posts.map((post) => (
+                {posts.map((post,index) => (
                   <li key={post.id} className="relative rounded-md p-3 ">
                     <h3 className="text-sm font-medium leading-5"> {`${post.id}. ${post.Question}`}</h3>
                     <ul className="mt-1 flex space-x-1 text-xs font-normal leading-4 text-gray-500">
                       {/* 自作できた！！！ 2022/6/8 →ここをradio buttonにしたい→できた! 2022/6/10 */}
-                      <RadioShowAnswers key={post.id} Answers={post.Answers} Correct={post.Correct} isShowAnswers={isShowAnswers} />
+                      <RadioShowAnswers key={post.id} Answers={post.Answers} SelectedAnswer={post.SelectedAnswer} Correct={post.Correct} isShowAnswers={isShowAnswers} index={index} categories={categories} setCategories={setCategories} inputAnswer={inputAnswer } />
                     </ul>
                     {/* <a href="#" className={classNames("absolute inset-0 rounded-md", "ring-blue-400 focus:z-10 focus:outline-none focus:ring-2")} /> */}
                   </li>
