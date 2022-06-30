@@ -79,20 +79,24 @@ export const EachQuizTabs = (props) => {
     ],
   });
 
-  const inputAnswer = (SelectedAnswer, targetIndex) => {
-    const newCategories = Object.values(categories).map((posts) => {
-    return (
-      posts.map((post, index) => {
-        return (
-          index === targetIndex ? { ...post, SelectedAnswer  } : post
-          )
-        })
-      )
+  const inputAnswer = (value, targetIndex) => {
+    Object.values(categories).forEach((posts, index) => {
+      console.log(posts)
+      posts.forEach((post) => {
+        targetIndex === index ? [...posts, post.SelectedAnswer = value] : posts;
+
+      })
     })
-    console.log(newCategories);
-    setCategories(newCategories);
   }
 
+  // この記述はあと一息 => あとは押下した後にSelectedAnswerの値を変えるようにするだけ
+  Object.values(categories).forEach((posts, index) => {
+    console.log(posts)
+    posts.forEach((post) => {
+      const newCategories = [...posts, post.SelectedAnswer = post.Answers[0]];
+      console.log(newCategories);
+    })
+  })
 
 
   return (
@@ -115,7 +119,7 @@ export const EachQuizTabs = (props) => {
                     <h3 className="text-sm font-medium leading-5"> {`${post.id}. ${post.Question}`}</h3>
                     <ul className="mt-1 flex space-x-1 text-xs font-normal leading-4 text-gray-500">
                       {/* 自作できた！！！ 2022/6/8 →ここをradio buttonにしたい→できた! 2022/6/10 */}
-                      <RadioShowAnswers key={post.id} Answers={post.Answers} SelectedAnswer={post.SelectedAnswer} Correct={post.Correct} isShowAnswers={isShowAnswers} index={index} categories={categories} setCategories={setCategories} inputAnswer={inputAnswer } />
+                      <RadioShowAnswers key={post.id} Answers={post.Answers} SelectedAnswer={post.SelectedAnswer} Correct={post.Correct} isShowAnswers={isShowAnswers} index={index} categories={categories} setCategories={setCategories}  />
                     </ul>
                     {/* <a href="#" className={classNames("absolute inset-0 rounded-md", "ring-blue-400 focus:z-10 focus:outline-none focus:ring-2")} /> */}
                   </li>
