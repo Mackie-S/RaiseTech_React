@@ -21,7 +21,6 @@ export const App = () => {
     <>
       <Header onClickStart={onClickStart} onClickReset={onClickReset} />
       <div className="flex justify-center">{isShowQuizzes && <EachQuizTabs />}</div>
-      {/* <RequiredAleart /> */}
     </>
   );
 };
