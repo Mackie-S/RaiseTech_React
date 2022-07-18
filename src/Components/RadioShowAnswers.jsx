@@ -4,11 +4,15 @@ import { RadioGroup } from "@headlessui/react";
 
 export const RadioShowAnswers = (props) => {
 
+  // onChange={(key,index,value) => console.log(key,index,value)} この書き方だとkeyしか拾ってこない
 
   return (
     <div className="w-full px-4 py-16">
       <div className="mx-auto w-full max-w-md">
-        <RadioGroup value={props.SelectedAnswer} onChange={(value, index) => props.inputAnswer(value, index)}>
+        {/* props.inputAnswerの第一引数は仮で入れている */}
+        <RadioGroup value={props.SelectedAnswer} onChange={(value) => {
+          console.log(props.inputAnswer(props.Answers,props.index,value))
+        }}>
           <RadioGroup.Label className="sr-only">Server size</RadioGroup.Label>
           <div className="space-y-2">
             {props.Answers.map((Answer) => (
