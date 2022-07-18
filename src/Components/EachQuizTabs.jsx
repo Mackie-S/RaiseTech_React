@@ -79,19 +79,12 @@ export const EachQuizTabs = (props) => {
     ],
   });
 
-  // const inputAnswer = (value, targetIndex) => {
-  //   Object.values(categories).forEach((posts, index) => {
-  //     console.log(posts)
-  //     posts.forEach((post) => {
-  //       targetIndex === index ? [...posts, post.SelectedAnswer = value] : posts;
-
-  //     })
-  //   })
-  // }
   const inputAnswer = (key, quizIndex, answerValue) => {
     const newCategories = { ...categories }; // ググるとObject.assign({}, categories)の書き方が多く出る
     console.log(categories);
-
+    console.log(key)
+    console.log(quizIndex)
+    console.log(answerValue)
     // 引数のkeyをもとに、categoriesから対象のクイズ種別を取得する（Reactクイズ）
     // const over30List = {};
     // newCategories.forEach((eachQuiz) => {
@@ -119,11 +112,12 @@ export const EachQuizTabs = (props) => {
     console.log(quiz);
 
     // quizのSelectedAnswerにanswerValueを設定する
-    quiz.SelectedAnswer = answerValue;
+    quiz.SelectedAnswer = answerValue; // shallow copy なのでnewCategoriesもcategoriesも中身の部分が変わる
+    setCategories(newCategories);
   };
-  console.log(inputAnswer("Reactクイズ", 0, "Twitter"));
+  // console.log(inputAnswer("Reactクイズ", 0, "Twitter"));
 
-  inputAnswer("Reactクイズ", 0, "Twitter"); // 0は「0番目の問題」
+  // inputAnswer("Reactクイズ", 0, "Twitter"); // 0は「0番目の問題」
 
   return (
     <div className="w-full max-w-2xl px-2 py-16 sm:px-0 rounded-xl">
