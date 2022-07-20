@@ -3,24 +3,25 @@ import { Tab } from "@headlessui/react";
 import { RadioShowAnswers } from "./RadioShowAnswers";
 import { Buttons } from "./Buttons";
 
-// import { MyRadioGroup } from './MyRadioGroup'
-
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export const EachQuizTabs = (props) => {
   const [isShowAnswers, setIsShowAnswers] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   // 正答表示ボタンを押した際に正答を表示する機能
   const onClickshow = () => {
     setIsShowAnswers(true);
+    setIsDisabled(true);
   };
+
   // tabを移動した時に正答表示ボタンをリセットする機能
   const onChangeMoveTab = () => {
     setIsShowAnswers(false);
+    setIsDisabled(false);
   };
-  //
 
   const [categories, setCategories] = useState({
     Reactクイズ: [
@@ -102,22 +103,24 @@ export const EachQuizTabs = (props) => {
     //   }
     // }
     // for文だと変数に格納するのが厳しかった
-    const newCategoriesKeys = Object.keys(newCategories);
-    const target = newCategoriesKeys.filter((eachQuiz) => key === eachQuiz); // Reactクイズが取得できたのを確認！
-    const targetValue = newCategories[target]; // Reactクイズのvalue取得完了
-    console.log(targetValue)
 
-    // targetvalueから特定のクイズを取得する（Reactを開発したのは誰？）のオブジェクト
+    // まずはnewCategoriesオブジェクトのkeyを配列化
+    const newCategoriesKeys = Object.keys(newCategories);
+
+    // 外部から引数で受け取った値を元に条件に合う配列のみ抽出
+    const target = newCategoriesKeys.filter((eachQuiz) => key === eachQuiz); // Reactクイズが取得できたのを確認！
+
+    // targetに該当するvalueをnewCategoriesから取得
+    const targetValue = newCategories[target]; // Reactクイズのvalue取得完了
+
+    // targetvalueから特定のクイズオブジェクトを取得する
     const quiz = targetValue.find((value, index) => quizIndex === index);
-    console.log(quiz);
 
     // quizのSelectedAnswerにanswerValueを設定する
     quiz.SelectedAnswer = answerValue; // shallow copy なのでnewCategoriesもcategoriesも中身の部分が変わる
+
     setCategories(newCategories);
   };
-  // console.log(inputAnswer("Reactクイズ", 0, "Twitter"));
-
-  // inputAnswer("Reactクイズ", 0, "Twitter"); // 0は「0番目の問題」
 
   return (
     <div className="w-full max-w-2xl px-2 py-16 sm:px-0 rounded-xl">
@@ -131,7 +134,8 @@ export const EachQuizTabs = (props) => {
           ))}
         </Tab.List>
         <Tab.Panels className="mt-2">
-          {Object.values(categories).map((posts, idx) => (
+          {/* .entriesにしてcategoryを定義したのはpropsを渡したかったから */}
+          {Object.entries(categories).map(([category,posts], idx) => (
             <Tab.Panel key={idx} className={classNames("rounded-xl bg-white p-3", "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none")}>
               <ul>
                 {posts.map((post, index) => (
@@ -139,9 +143,8 @@ export const EachQuizTabs = (props) => {
                     <h3 className="text-sm font-medium leading-5"> {`${post.id}. ${post.Question}`}</h3>
                     <ul className="mt-1 flex space-x-1 text-xs font-normal leading-4 text-gray-500">
                       {/* 自作できた！！！ 2022/6/8 →ここをradio buttonにしたい→できた! 2022/6/10 */}
-                      <RadioShowAnswers key={post.id} Answers={post.Answers} SelectedAnswer={post.SelectedAnswer} Correct={post.Correct} isShowAnswers={isShowAnswers} index={index} categories={categories} setCategories={setCategories} inputAnswer={inputAnswer} />
+                      <RadioShowAnswers Answers={post.Answers} SelectedAnswer={post.SelectedAnswer} Correct={post.Correct} isShowAnswers={isShowAnswers} index={index} inputAnswer={inputAnswer} category={category} isDisabled={ isDisabled} />
                     </ul>
-                    {/* <a href="#" className={classNames("absolute inset-0 rounded-md", "ring-blue-400 focus:z-10 focus:outline-none focus:ring-2")} /> */}
                   </li>
                 ))}
               </ul>
